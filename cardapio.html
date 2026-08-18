@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Cardápio — {{ nome_empresa }}{% endblock %}
+{% block description %}Todos os sabores de brownie artesanal da VITTA, com ingredientes e informações completas.{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="wrap">
+    <span class="label">cardápio completo</span>
+    <h1>Cada sabor tem<br><em>uma história</em></h1>
+    <p class="hero-lede">Cinco receitas, todas testadas, provadas e aprovadas. Escolha a sua.</p>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+
+    {% set houve_produto = namespace(valor=false) %}
+    {% set cor = namespace(i=0) %}
+
+    {% for categoria in categorias %}
+      {% set produtos_disponiveis = categoria.produtos | selectattr('disponivel') | list %}
+      {% if produtos_disponiveis %}
+        {% set houve_produto.valor = true %}
+        <div class="section-head">
+          <span class="label">categoria</span>
+          <h2>{{ categoria.nome }}</h2>
+        </div>
+        <div class="grid-cardapio">
+          {% for s in produtos_disponiveis %}
+            {% set cor.i = cor.i + 1 %}
+            <div class="menu-item">
+              <div class="menu-item-color swatch--{{ (cor.i % 5) + 1 }}">
+                <svg class="bookmark" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1H15V19L8 14.5L1 19V1Z" stroke="currentColor" stroke-width="1.4"/>
+                </svg>
+                <span class="label">{{ s.tag or categoria.nome }}</span>
+                <h3>{{ s.nome }}</h3>
+                <span class="swatch-price">{{ s.preco_formatado() }}</span>
+              </div>
+              <div class="menu-item-info">
+                <p>{{ s.descricao }}</p>
+                <dl>
+                  {% if s.ingredientes %}
+                  <dt>Ingredientes</dt>
+                  <dd>{{ s.ingredientes }}</dd>
+                  {% endif %}
+                  {% if s.alergenos %}
+                  <dt>Alérgenos</dt>
+                  <dd>{{ s.alergenos }}</dd>
+                  {% endif %}
+                </dl>
+                <form action="{{ url_for('pedido_rapido') }}" method="POST">
+                  <input type="hidden" name="produto_id" value="{{ s.id }}">
+                  <button type="submit" class="btn btn-dark">Pedir pelo WhatsApp</button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    {% if sem_categoria %}
+      {% set houve_produto.valor = true %}
+      <div class="section-head">
+        <span class="label">também disponível</span>
+        <h2>Outros sabores</h2>
+      </div>
+      <div class="grid-cardapio">
+        {% for s in sem_categoria %}
+          {% set cor.i = cor.i + 1 %}
+          <div class="menu-item">
+            <div class="menu-item-color swatch--{{ (cor.i % 5) + 1 }}">
+              <svg class="bookmark" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1H15V19L8 14.5L1 19V1Z" stroke="currentColor" stroke-width="1.4"/>
+              </svg>
+              <span class="label">{{ s.tag or 'sabor da casa' }}</span>
+              <h3>{{ s.nome }}</h3>
+              <span class="swatch-price">{{ s.preco_formatado() }}</span>
+            </div>
+            <div class="menu-item-info">
+              <p>{{ s.descricao }}</p>
+              <dl>
+                {% if s.ingredientes %}
+                <dt>Ingredientes</dt>
+                <dd>{{ s.ingredientes }}</dd>
+                {% endif %}
+                {% if s.alergenos %}
+                <dt>Alérgenos</dt>
+                <dd>{{ s.alergenos }}</dd>
+                {% endif %}
+              </dl>
+              <form action="{{ url_for('pedido_rapido') }}" method="POST">
+                <input type="hidden" name="produto_id" value="{{ s.id }}">
+                <button type="submit" class="btn btn-dark">Pedir pelo WhatsApp</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if not houve_produto.valor %}
+    <div class="vazio">
+      <p>Nenhum produto cadastrado ainda.</p>
+      <p>Rode <code>flask --app app seed-db</code> para carregar o cardápio inicial, ou entre no <a href="{{ url_for('admin_login') }}">painel administrativo</a> e cadastre os sabores.</p>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="wrap">
+    <span class="label">encomendas maiores</span>
+    <h2>Festa, evento ou bazar?</h2>
+    <p>Fazemos kits e caixas fechadas para ocasiões especiais. Fale com a gente para combinar quantidade e prazo.</p>
+    <div class="cta-buttons">
+      <a class="btn" href="{{ url_for('contato') }}">Falar com a gente</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

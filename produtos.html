@@ -1,0 +1,37 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Cardápio{% endblock %}
+{% block admin_content %}
+
+<div class="admin-topo-lista">
+  <h1 class="titulo-pagina">Cardápio</h1>
+  <a href="{{ url_for('admin_produto_novo') }}" class="btn btn-dark">+ Novo produto</a>
+</div>
+
+{% if produtos %}
+<table class="admin-tabela">
+  <thead>
+    <tr><th>Nome</th><th>Categoria</th><th>Preço</th><th>Disponível</th><th>Destaque</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for produto in produtos %}
+    <tr>
+      <td>{{ produto.nome }}</td>
+      <td>{{ produto.categoria.nome if produto.categoria else '—' }}</td>
+      <td>{{ produto.preco_formatado() }}</td>
+      <td>{{ 'Sim' if produto.disponivel else 'Não' }}</td>
+      <td>{{ 'Sim' if produto.destaque else 'Não' }}</td>
+      <td class="admin-tabela-acoes">
+        <a href="{{ url_for('admin_produto_editar', produto_id=produto.id) }}">Editar</a>
+        <form method="POST" action="{{ url_for('admin_produto_excluir', produto_id=produto.id) }}" onsubmit="return confirm('Excluir este produto?');">
+          <button type="submit" class="btn-link btn-perigo-link">Excluir</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Nenhum produto cadastrado ainda. <a href="{{ url_for('admin_produto_novo') }}">Adicione o primeiro</a>.</p>
+{% endif %}
+
+{% endblock %}

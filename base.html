@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{{ nome_empresa }} — {{ slogan }}{% endblock %}</title>
+<meta name="description" content="{% block description %}Brownies artesanais feitos à mão, um lote de cada vez. Do latim vita, vida.{% endblock %}">
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="{{ url_for('index') }}" class="brand">
+      <img class="mark" src="{{ url_for('static', filename='img/logo-vitta-full.png') }}" alt="{{ nome_empresa }}">
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' }}">Início</a></li>
+      <li><a href="{{ url_for('cardapio') }}" class="{{ 'active' if request.endpoint == 'cardapio' }}">Cardápio</a></li>
+      <li><a href="{{ url_for('sobre') }}" class="{{ 'active' if request.endpoint == 'sobre' }}">Sobre</a></li>
+      <li><a href="{{ url_for('contato') }}" class="{{ 'active' if request.endpoint == 'contato' }}">Contato</a></li>
+      <li><a href="{{ url_for('cardapio') }}" class="nav-cta">Pedir agora</a></li>
+    </ul>
+  </div>
+</header>
+
+{% with mensagens = get_flashed_messages(with_categories=true) %}
+{% if mensagens %}
+<div class="flash-container wrap">
+  {% for categoria, msg in mensagens %}
+  <div class="flash flash-{{ categoria }}">{{ msg }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+
+    <div class="footer-brand">
+      <a href="{{ url_for('index') }}" class="brand">
+        <img src="{{ url_for('static', filename='img/logo-vitta-full.png') }}" alt="{{ nome_empresa }}" style="width:170px; height:auto;">
+      </a>
+      <p class="foot-tagline">{{ slogan }}</p>
+      <p class="foot-note" style="margin-top:16px;">Projeto de itinerário · feito à mão, com carinho</p>
+    </div>
+
+    <div class="footer-col">
+      <span class="foot-heading">Navegação</span>
+      <a href="{{ url_for('index') }}">Início</a>
+      <a href="{{ url_for('cardapio') }}">Cardápio</a>
+      <a href="{{ url_for('sobre') }}">Sobre</a>
+      <a href="{{ url_for('contato') }}">Contato</a>
+    </div>
+
+    <div class="footer-col">
+      <span class="foot-heading">Fale com a gente</span>
+      <a href="https://wa.me/{{ whatsapp }}?text=Oioi%2C%20gostaria%20de%20ado%C3%A7ar%20meu%20dia%20com%20um%20pedido%20%3A%29" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://instagram.com/{{ instagram }}" target="_blank" rel="noopener">@{{ instagram }}</a>
+      <a href="{{ url_for('admin_login') }}">Área administrativa</a>
+    </div>
+
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 {{ nome_empresa }} — todos os direitos reservados</span>
+    <span>feito com Flask, café e um pouco de teimosia</span>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

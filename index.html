@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero-cards">
+  <div class="hero-panel hero-panel--cosmic">
+    <div class="panel-row">
+      <span class="label">vitta ateliê</span>
+      <span class="label">brownies artesanais</span>
+    </div>
+    <h1 class="panel-headline">Bem-vindos à<br><em>Vitta</em></h1>
+    <p class="hero-lede">Do latim <em>vita</em>, vida. O nome que demos aos nossos brownies feitos à mão, um lote de cada vez.</p>
+    <div class="hero-actions">
+      <a href="{{ url_for('cardapio') }}" class="btn">Ver o cardápio</a>
+      <a href="{{ url_for('sobre') }}" class="btn btn-outline">Conhecer a marca</a>
+    </div>
+  </div>
+
+  <div class="hero-roundel">
+    <img class="mark" src="{{ url_for('static', filename='img/logo-vitta-full.png') }}" alt="Selo VITTA">
+  </div>
+
+  <div class="hero-panel hero-panel--orange">
+    <p class="panel-headline">vida em cada<br>mordida</p>
+    <div class="panel-row">
+      <span class="panel-caption">cacau 70% · feito à mão</span>
+      <span class="panel-caption">desde 2026</span>
+    </div>
+  </div>
+</section>
+
+<section class="diferenciais">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+      <span class="label"><svg class="sparkle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c0 6-1 10-3 12s-6 3-9 3c3 0 7 1 9 3s3 6 3 9c0-3 1-7 3-9s6-3 9-3c-3 0-7-1-9-3s-3-6-3-9Z"/></svg> por que a vitta</span>
+      <h2>O que fazemos <em>diferente</em></h2>
+    </div>
+    <div class="grid-diferenciais">
+      <div class="dif-card">
+        <span class="dif-numero">1</span>
+        <h3>Feito na hora</h3>
+        <p>Sem conservantes: cada lote é assado por encomenda, sempre fresquinho.</p>
+      </div>
+      <div class="dif-card">
+        <span class="dif-numero">2</span>
+        <h3>Ingredientes de verdade</h3>
+        <p>Cacau nobre, manteiga de verdade, nada de misturas prontas.</p>
+      </div>
+      <div class="dif-card">
+        <span class="dif-numero">3</span>
+        <h3>Embalado à mão</h3>
+        <p>Cada caixinha sai da nossa cozinha com o selo VITTA de garantia.</p>
+      </div>
+      <div class="dif-card">
+        <span class="dif-numero">4</span>
+        <h3>Feito por quem ama fazer</h3>
+        <p>Um projeto de itinerário que virou vontade de fazer as coisas direito.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sabores" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label"><svg class="sparkle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c0 6-1 10-3 12s-6 3-9 3c3 0 7 1 9 3s3 6 3 9c0-3 1-7 3-9s6-3 9-3c-3 0-7-1-9-3s-3-6-3-9Z"/></svg> cardápio</span>
+      <h2>Alguns dos nossos <em>sabores</em></h2>
+    </div>
+    {% if destaques %}
+    <div class="grid-sabores">
+      {% for s in destaques %}
+      <div class="swatch swatch--{{ loop.index }}">
+        <svg class="bookmark" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1H15V19L8 14.5L1 19V1Z" stroke="currentColor" stroke-width="1.4"/>
+        </svg>
+        <span class="label">{{ s.tag or 'sabor da casa' }}</span>
+        <h3>{{ s.nome }}</h3>
+        <p class="swatch-desc">{{ s.descricao }}</p>
+        <div class="swatch-foot">
+          <span class="swatch-caption">preço</span>
+          <span class="swatch-price">{{ s.preco_formatado() }}</span>
+        </div>
+        <form action="{{ url_for('pedido_rapido') }}" method="POST">
+          <input type="hidden" name="produto_id" value="{{ s.id }}">
+          <button type="submit" class="swatch-btn">Pedir este</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="vazio">
+      <p>O cardápio ainda está sendo preparado por aqui.</p>
+      <p>Rode <code>flask --app app seed-db</code> para carregar os sabores iniciais, ou cadastre pelo <a href="{{ url_for('admin_login') }}">painel administrativo</a>.</p>
+    </div>
+    {% endif %}
+    <div class="section-cta">
+      <a href="{{ url_for('cardapio') }}" class="btn btn-dark">Ver cardápio completo →</a>
+    </div>
+  </div>
+</section>
+
+<section class="depoimentos">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+      <span class="label"><svg class="sparkle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c0 6-1 10-3 12s-6 3-9 3c3 0 7 1 9 3s3 6 3 9c0-3 1-7 3-9s6-3 9-3c-3 0-7-1-9-3s-3-6-3-9Z"/></svg> quem já provou <svg class="sparkle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c0 6-1 10-3 12s-6 3-9 3c3 0 7 1 9 3s3 6 3 9c0-3 1-7 3-9s6-3 9-3c-3 0-7-1-9-3s-3-6-3-9Z"/></svg></span>
+      <h2>O que estão <em>dizendo</em></h2>
+    </div>
+    <div class="grid-depoimentos">
+      <div class="depoimento-card">
+        <svg class="quote-mark" viewBox="0 0 32 24" fill="none"><path d="M13.6 0C7.2 3.2 3 9.4 3 16c0 4.4 3 8 7 8s7-3.4 7-7.6c0-3.6-2.4-6.4-5.6-7 .8-3.2 3.4-6 6.4-7.6L13.6 0Zm18 0c-6.4 3.2-10.6 9.4-10.6 16 0 4.4 3 8 7 8s7-3.4 7-7.6c0-3.6-2.4-6.4-5.6-7 .8-3.2 3.4-6 6.4-7.6L31.6 0Z" fill="currentColor"/></svg>
+        <p class="depoimento-texto">Amei muito o brownie! Tava simplesmente maravilhoso, muito gostoso. O atendimento também foi ótimo, tudo feito com muito carinho. Vocês fizeram um trabalho incrível!</p>
+        <div class="depoimento-autor">
+          <span class="nome">Isabelly</span>
+          <span class="papel">cliente</span>
+        </div>
+      </div>
+      <div class="depoimento-card">
+        <svg class="quote-mark" viewBox="0 0 32 24" fill="none"><path d="M13.6 0C7.2 3.2 3 9.4 3 16c0 4.4 3 8 7 8s7-3.4 7-7.6c0-3.6-2.4-6.4-5.6-7 .8-3.2 3.4-6 6.4-7.6L13.6 0Zm18 0c-6.4 3.2-10.6 9.4-10.6 16 0 4.4 3 8 7 8s7-3.4 7-7.6c0-3.6-2.4-6.4-5.6-7 .8-3.2 3.4-6 6.4-7.6L31.6 0Z" fill="currentColor"/></svg>
+        <p class="depoimento-texto">Um pedacinho de felicidade tem nome: Vitta. E o melhor? Por trás de cada brownie existe muito mais do que sabor — nossos alunos da Legacy School estão colocando em prática criatividade, empreendedorismo e muitos aprendizados.</p>
+        <div class="depoimento-autor">
+          <span class="nome">Carine Peres</span>
+          <span class="papel">mídia · Legacy School</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="wrap">
+    <span class="label">peça o seu</span>
+    <h2>Escolha o sabor, a gente cuida do resto</h2>
+    <p>Faça seu pedido pelo WhatsApp e combine a entrega direto com a gente.</p>
+    <div class="cta-buttons">
+      <a class="btn" href="https://wa.me/{{ whatsapp }}?text=Oioi%2C%20gostaria%20de%20ado%C3%A7ar%20meu%20dia%20com%20um%20pedido%20%3A%29" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      <a class="btn btn-outline" href="{{ url_for('cardapio') }}">Ver cardápio</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

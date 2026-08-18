@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Contato — {{ nome_empresa }}{% endblock %}
+{% block description %}Fale com a VITTA pelo WhatsApp ou Instagram, veja horários de atendimento e tire suas dúvidas.{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="wrap">
+    <span class="label">encomendas</span>
+    <h1>Vamos combinar<br><em>o seu pedido?</em></h1>
+  </div>
+</section>
+
+<section>
+  <div class="wrap contato-grid">
+
+    <div class="contato-form-card">
+      <h2>Fazer uma encomenda</h2>
+      <p>Preencha os dados abaixo com o que você gostaria de encomendar. A gente confirma sabor, quantidade e data pelo contato informado.</p>
+      <form method="POST" class="form">
+        <label for="nome">Nome*</label>
+        <input type="text" id="nome" name="nome" value="{{ nome or '' }}" required>
+
+        <label for="telefone">Telefone / WhatsApp*</label>
+        <input type="text" id="telefone" name="telefone" value="{{ telefone or '' }}" placeholder="(21) 99999-9999" required>
+
+        <label for="email">E-mail (opcional)</label>
+        <input type="email" id="email" name="email" value="{{ email or '' }}">
+
+        <label for="data_desejada">Data desejada (opcional)</label>
+        <input type="text" id="data_desejada" name="data_desejada" value="{{ data_desejada or '' }}" placeholder="Ex: sábado, dia 20 de manhã">
+
+        <label for="detalhes">O que você gostaria de encomendar?*</label>
+        <textarea id="detalhes" name="detalhes" rows="4" required placeholder="Ex: 6 brownies de doce de leite e 6 de nozes...">{{ detalhes or '' }}</textarea>
+
+        <button type="submit" class="btn btn-dark">Enviar encomenda</button>
+      </form>
+    </div>
+
+    <div class="contato-info">
+      <div class="info-block">
+        <span class="foot-heading">Horários</span>
+        <ul class="horarios-list">
+          <li><span>Segunda a sexta</span><span>encomendas das 8h às 18h</span></li>
+          <li><span>Sábado</span><span>entregas combinadas pela manhã</span></li>
+          <li><span>Domingo</span><span>fechado</span></li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <span class="foot-heading">Canais diretos</span>
+        <a class="btn-outline-dark" href="https://wa.me/{{ whatsapp }}?text=Oioi%2C%20gostaria%20de%20ado%C3%A7ar%20meu%20dia%20com%20um%20pedido%20%3A%29" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn-outline-dark" href="https://instagram.com/{{ instagram }}" target="_blank" rel="noopener">@{{ instagram }}</a>
+      </div>
+      <div class="info-block">
+        <span class="foot-heading">Entrega</span>
+        <p style="margin:0; font-size:14.5px; color:var(--cacau-soft);">{{ endereco }}</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section-alt" id="faq">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+      <span class="label">dúvidas comuns</span>
+      <h2>Perguntas <em>frequentes</em></h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Como eu faço um pedido?</summary>
+        <p>Preencha o formulário acima com sabor, quantidade e data desejada, ou escolha um sabor direto no cardápio e clique em "Pedir" para falar no WhatsApp.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Vocês entregam ou é só retirada?</summary>
+        <p>As duas opções! Entrega e retirada são combinadas diretamente pelo WhatsApp, de acordo com a região e a agenda de produção da semana.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Tem opção vegana ou sem glúten?</summary>
+        <p>Temos o sabor Banana com Canela, que é vegano. Ainda não temos opção sem glúten, mas é algo que pretendemos desenvolver.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Qual o prazo de entrega?</summary>
+        <p>Como cada lote é feito por encomenda, pedimos pelo menos 48h de antecedência. Para encomendas grandes (festas, eventos), o ideal é combinar com uma semana de antecedência.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Quais as formas de pagamento?</summary>
+        <p>Pix e dinheiro. Os detalhes são combinados na confirmação do pedido.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Painel{% endblock %}
+{% block admin_content %}
+
+<h1 class="titulo-pagina">Painel</h1>
+
+<div class="admin-cartoes">
+  <div class="admin-cartao">
+    <span class="admin-cartao-numero">{{ total_pedidos_novos }}</span>
+    <span class="admin-cartao-label">pedidos novos</span>
+  </div>
+  <div class="admin-cartao">
+    <span class="admin-cartao-numero">{{ total_produtos }}</span>
+    <span class="admin-cartao-label">produtos no cardápio</span>
+  </div>
+</div>
+
+<h2 class="categoria-titulo">Últimos pedidos</h2>
+
+{% if ultimos_pedidos %}
+<table class="admin-tabela">
+  <thead>
+    <tr><th>Cliente</th><th>Telefone</th><th>Status</th><th>Recebido em</th></tr>
+  </thead>
+  <tbody>
+    {% for pedido in ultimos_pedidos %}
+    <tr>
+      <td>{{ pedido.nome_cliente }}</td>
+      <td>{{ pedido.telefone }}</td>
+      <td><span class="etiqueta-status etiqueta-status-{{ pedido.status }}">{{ pedido.status }}</span></td>
+      <td>{{ pedido.criado_em.strftime('%d/%m/%Y %H:%M') }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p><a href="{{ url_for('admin_pedidos') }}">Ver todos os pedidos &rarr;</a></p>
+{% else %}
+<p>Nenhum pedido recebido ainda.</p>
+{% endif %}
+
+{% endblock %}

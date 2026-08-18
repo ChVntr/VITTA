@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Sobre — {{ nome_empresa }}{% endblock %}
+{% block description %}Conheça a história por trás da VITTA, um projeto de itinerário que virou marca de brownies artesanais.{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="wrap">
+    <span class="label">nossa história</span>
+    <h1>De um trabalho de escola<br><em>a uma marca de verdade</em></h1>
+  </div>
+</section>
+
+<section>
+  <div class="wrap sobre">
+    <div class="latin-card">
+      <p class="latin-word">vita, -ae</p>
+      <div class="latin-foot">
+        <span class="code">substantivo · latim</span>
+        <span class="translation">vida</span>
+      </div>
+    </div>
+    <div class="sobre-text">
+      <span class="label">de onde veio o nome</span>
+      <h2 class="sobre-heading">Um brownie não é só sobremesa. <em>É um respiro.</em></h2>
+      <p>A VITTA nasceu de um trabalho de escola que virou vontade de fazer algo de verdade: brownies simples, bem feitos, sem enrolação. Escolhemos o latim porque queríamos um nome que lembrasse o essencial — viver bem, com as coisas boas da vida por perto.</p>
+      <p>O que começou como uma apresentação de itinerário virou uma cozinha de verdade, com receitas testadas, embalagens pensadas e um propósito que vai além da nota: fazer as pessoas pararem por um minuto para aproveitar algo bem feito.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+      <span class="label">o que nos guia</span>
+      <h2>Nossos <em>valores</em></h2>
+    </div>
+    <div class="grid-valores">
+      <div class="valor-card">
+        <h3>Simplicidade</h3>
+        <p>Poucos ingredientes, todos de verdade. Sem enrolação na receita nem no preço.</p>
+      </div>
+      <div class="valor-card">
+        <h3>Cuidado</h3>
+        <p>Cada brownie é feito e embalado como se fosse para alguém da nossa própria família.</p>
+      </div>
+      <div class="valor-card">
+        <h3>Propósito</h3>
+        <p>Nasceu de um trabalho de escola, mas foi feito para durar além da nota.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="processo">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+      <span class="label">bastidores</span>
+      <h2>Como nasce um <em>brownie Vitta</em></h2>
+    </div>
+    <div class="grid-processo">
+      <div class="passo">
+        <span class="numero">01</span>
+        <h3>Selecionamos</h3>
+        <p>Ingredientes simples e de verdade: manteiga, cacau, ovos e muito carinho.</p>
+      </div>
+      <div class="passo">
+        <span class="numero">02</span>
+        <h3>Assamos</h3>
+        <p>Em pequenos lotes, do jeito artesanal, sempre no ponto certo — nem seco, nem cru.</p>
+      </div>
+      <div class="passo">
+        <span class="numero">03</span>
+        <h3>Embalamos</h3>
+        <p>À mão, um a um, com o selo VITTA — prontinho pra chegar até você.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="wrap">
+    <span class="label">vem provar</span>
+    <h2>Já experimentou um brownie Vitta?</h2>
+    <p>Dá uma olhada no cardápio e escolha o seu favorito.</p>
+    <div class="cta-buttons">
+      <a class="btn" href="{{ url_for('cardapio') }}">Ver cardápio</a>
+      <a class="btn btn-outline" href="{{ url_for('contato') }}">Falar com a gente</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

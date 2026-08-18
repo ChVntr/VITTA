@@ -1,0 +1,258 @@
+/* Depends on tokens defined in style.css (:root) — always load style.css first */
+
+.titulo-pagina {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 28px;
+  margin: 0 0 6px;
+  color: var(--cacau);
+}
+
+.categoria-titulo {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 19px;
+  margin: 32px 0 6px;
+  color: var(--cacau);
+}
+
+code {
+  background: var(--butter);
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+/* ── Login ────────────────────────────────────── */
+
+.login-body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cacau);
+  font-family: var(--body);
+}
+
+.login-caixa {
+  background: var(--cosmic);
+  padding: 40px 36px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+.login-caixa h1 { font-size: 22px; margin-bottom: 2px; }
+.login-sub { color: var(--cacau-soft); margin-top: 0; font-size: 14px; }
+.login-voltar { margin-top: 20px; font-size: 13.5px; text-align: center; }
+
+/* ── Shell ────────────────────────────────────── */
+
+.admin-body { margin: 0; background: var(--cosmic); }
+.admin-shell { display: flex; min-height: 100vh; }
+
+.admin-lateral {
+  width: 220px;
+  background: var(--cacau);
+  color: var(--butter);
+  padding: 26px 18px;
+  flex-shrink: 0;
+}
+
+.admin-marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--cosmic);
+  margin-bottom: 26px;
+}
+.admin-marca .mark { width: 34px; height: auto; }
+
+.admin-nav { display: flex; flex-direction: column; gap: 4px; }
+
+.admin-nav a {
+  color: var(--butter);
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 14.5px;
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+.admin-nav a:hover, .admin-nav a.ativo {
+  background: rgba(255,255,255,0.08);
+  color: var(--cosmic);
+  opacity: 1;
+}
+
+.admin-conteudo { flex: 1; padding: 40px 44px; max-width: 1000px; }
+
+/* ── Cartões de resumo ────────────────────────── */
+
+.admin-cartoes { display: flex; gap: 18px; margin-bottom: 10px; flex-wrap: wrap; }
+
+.admin-cartao {
+  background: var(--butter);
+  border-radius: 18px;
+  padding: 22px 28px;
+  min-width: 160px;
+}
+
+.admin-cartao-numero {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--orange-deep);
+}
+
+.admin-cartao-label { font-size: 13.5px; color: var(--cacau-soft); }
+
+/* ── Tabela ───────────────────────────────────── */
+
+.admin-topo-lista { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+
+.admin-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  background: var(--cosmic);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.admin-tabela th, .admin-tabela td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.admin-tabela th {
+  background: var(--butter);
+  font-weight: 600;
+  color: var(--cacau);
+}
+
+.admin-tabela tr:last-child td { border-bottom: none; }
+.admin-tabela-acoes { display: flex; gap: 14px; align-items: center; }
+.admin-tabela-acoes form { display: inline; }
+
+/* ── Status badges ────────────────────────────── */
+
+.etiqueta-status {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 11px;
+  border-radius: 999px;
+}
+
+.etiqueta-status-novo { background: var(--butter); color: var(--orange-deep); }
+.etiqueta-status-em_andamento { background: #E4E9F7; color: #33468C; }
+.etiqueta-status-concluido { background: #EAF1E6; color: #3d5a33; }
+.etiqueta-status-cancelado { background: #FBE9E5; color: #a3352b; }
+
+/* ── Pedidos ──────────────────────────────────── */
+
+.filtro-tabs { display: flex; gap: 6px; margin: 18px 0; flex-wrap: wrap; }
+
+.filtro-tab {
+  padding: 7px 15px;
+  border-radius: 999px;
+  background: var(--cosmic);
+  border: 1px solid var(--line);
+  color: var(--cacau-soft);
+  font-size: 13.5px;
+  text-decoration: none;
+}
+
+.filtro-tab.ativo { background: var(--cacau); color: var(--cosmic); border-color: var(--cacau); }
+
+.pedidos-lista { display: flex; flex-direction: column; gap: 14px; margin-top: 10px; }
+
+.pedido-cartao {
+  background: var(--cosmic);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+}
+
+.pedido-cabecalho { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.pedido-cabecalho h3 { font-family: var(--display); font-weight: 600; font-size: 17px; margin: 0 0 2px; color: var(--cacau); }
+.pedido-meta { font-size: 12.5px; color: var(--cacau-soft); margin: 2px 0; }
+.pedido-detalhes { margin: 10px 0; font-size: 14.5px; color: var(--cacau); }
+
+.pedido-acoes { display: flex; gap: 12px; align-items: center; margin-top: 10px; }
+.pedido-acoes select {
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  font-size: 13px;
+  font-family: var(--body);
+  background: var(--cosmic);
+  color: var(--cacau);
+}
+
+/* ── Botões extras do admin ───────────────────── */
+
+.btn-perigo {
+  background: transparent;
+  color: #a3352b;
+  border: 1.3px solid #a3352b;
+  padding: 8px 15px;
+  font-size: 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--body);
+}
+.btn-perigo:hover { background: #a3352b; color: var(--cosmic); }
+
+.btn-link { background: none; border: none; padding: 0; font: inherit; cursor: pointer; }
+.btn-perigo-link { color: #a3352b; text-decoration: underline; }
+
+/* ── Formulários do admin ─────────────────────── */
+
+.form-larga { max-width: 560px; }
+
+.form-linha { flex-direction: row; align-items: center; max-width: 480px; gap: 10px; }
+.form-linha input { flex: 1; margin: 0; }
+.form-linha button { margin: 0; }
+
+.checkbox-linha {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  text-transform: none;
+  margin-top: 14px !important;
+  font-size: 14.5px;
+  color: var(--cacau);
+}
+.checkbox-linha input { width: auto; padding: 0; }
+
+.admin-conteudo select {
+  font-family: var(--body);
+  font-size: 15.5px;
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--cosmic);
+  color: var(--cacau);
+}
+
+/* ── Responsivo ───────────────────────────────── */
+
+@media (max-width: 760px) {
+  .admin-shell { flex-direction: column; }
+  .admin-lateral { width: 100%; }
+  .admin-nav { flex-direction: row; flex-wrap: wrap; }
+  .admin-conteudo { padding: 24px 20px; }
+}

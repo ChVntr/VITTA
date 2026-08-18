@@ -1,0 +1,47 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Pedidos{% endblock %}
+{% block admin_content %}
+
+<h1 class="titulo-pagina">Pedidos</h1>
+
+<div class="filtro-tabs">
+  {% for valor, rotulo in [('todos','Todos'), ('novo','Novos'), ('em_andamento','Em andamento'), ('concluido','Concluídos'), ('cancelado','Cancelados')] %}
+  <a href="{{ url_for('admin_pedidos', status=valor) }}" class="filtro-tab {{ 'ativo' if filtro == valor }}">{{ rotulo }}</a>
+  {% endfor %}
+</div>
+
+{% if pedidos %}
+<div class="pedidos-lista">
+  {% for pedido in pedidos %}
+  <article class="pedido-cartao">
+    <div class="pedido-cabecalho">
+      <div>
+        <h3>{{ pedido.nome_cliente }}</h3>
+        <p class="pedido-meta">{{ pedido.telefone }}{% if pedido.email %} · {{ pedido.email }}{% endif %}</p>
+      </div>
+      <span class="etiqueta-status etiqueta-status-{{ pedido.status }}">{{ pedido.status }}</span>
+    </div>
+    <p class="pedido-detalhes">{{ pedido.detalhes }}</p>
+    {% if pedido.data_desejada %}<p class="pedido-meta">Data desejada: {{ pedido.data_desejada }}</p>{% endif %}
+    <p class="pedido-meta">Recebido em {{ pedido.criado_em.strftime('%d/%m/%Y %H:%M') }}</p>
+    <div class="pedido-acoes">
+      <form method="POST" action="{{ url_for('admin_pedido_status', pedido_id=pedido.id) }}">
+        <select name="status" onchange="this.form.submit()">
+          <option value="novo" {{ 'selected' if pedido.status == 'novo' }}>Novo</option>
+          <option value="em_andamento" {{ 'selected' if pedido.status == 'em_andamento' }}>Em andamento</option>
+          <option value="concluido" {{ 'selected' if pedido.status == 'concluido' }}>Concluído</option>
+          <option value="cancelado" {{ 'selected' if pedido.status == 'cancelado' }}>Cancelado</option>
+        </select>
+      </form>
+      <form method="POST" action="{{ url_for('admin_pedido_excluir', pedido_id=pedido.id) }}" onsubmit="return confirm('Excluir este pedido?');">
+        <button type="submit" class="btn-perigo">Excluir</button>
+      </form>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<p>Nenhum pedido encontrado para este filtro.</p>
+{% endif %}
+
+{% endblock %}

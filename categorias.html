@@ -1,0 +1,33 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Categorias{% endblock %}
+{% block admin_content %}
+
+<h1 class="titulo-pagina">Categorias do cardápio</h1>
+
+<form method="POST" class="form form-linha">
+  <input type="text" name="nome" placeholder="Ex: Clássicos, Edições especiais..." required>
+  <button type="submit" class="btn btn-dark">Adicionar</button>
+</form>
+
+{% if categorias %}
+<table class="admin-tabela">
+  <thead><tr><th>Nome</th><th>Produtos</th><th></th></tr></thead>
+  <tbody>
+    {% for categoria in categorias %}
+    <tr>
+      <td>{{ categoria.nome }}</td>
+      <td>{{ categoria.produtos | length }}</td>
+      <td class="admin-tabela-acoes">
+        <form method="POST" action="{{ url_for('admin_categoria_excluir', categoria_id=categoria.id) }}" onsubmit="return confirm('Excluir esta categoria?');">
+          <button type="submit" class="btn-link btn-perigo-link">Excluir</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Nenhuma categoria criada ainda.</p>
+{% endif %}
+
+{% endblock %}

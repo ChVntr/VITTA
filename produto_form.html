@@ -1,0 +1,53 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}{{ 'Editar produto' if produto else 'Novo produto' }}{% endblock %}
+{% block admin_content %}
+
+<h1 class="titulo-pagina">{{ 'Editar produto' if produto else 'Novo produto' }}</h1>
+
+<form method="POST" class="form form-larga">
+  <label for="nome">Nome*</label>
+  <input type="text" id="nome" name="nome" value="{{ produto.nome if produto else '' }}" required>
+
+  <label for="descricao">Descrição</label>
+  <textarea id="descricao" name="descricao" rows="3">{{ produto.descricao if produto else '' }}</textarea>
+
+  <label for="preco">Preço (ex: 14.00)*</label>
+  <input type="text" id="preco" name="preco" value="{{ produto.preco if produto else '' }}" required>
+
+  <label for="tag">Etiqueta curta (ex: "o original", "vegano")</label>
+  <input type="text" id="tag" name="tag" value="{{ produto.tag if produto else '' }}">
+
+  <label for="ingredientes">Ingredientes</label>
+  <textarea id="ingredientes" name="ingredientes" rows="2">{{ produto.ingredientes if produto else '' }}</textarea>
+
+  <label for="alergenos">Alérgenos</label>
+  <textarea id="alergenos" name="alergenos" rows="2">{{ produto.alergenos if produto else '' }}</textarea>
+
+  <label for="imagem_url">URL da imagem (opcional)</label>
+  <input type="text" id="imagem_url" name="imagem_url" value="{{ produto.imagem_url if produto else '' }}" placeholder="https://...">
+
+  <label for="categoria_id">Categoria</label>
+  <select id="categoria_id" name="categoria_id">
+    <option value="">Sem categoria</option>
+    {% for categoria in categorias %}
+    <option value="{{ categoria.id }}" {{ 'selected' if produto and produto.categoria_id == categoria.id }}>{{ categoria.nome }}</option>
+    {% endfor %}
+  </select>
+
+  <label class="checkbox-linha">
+    <input type="checkbox" name="disponivel" {{ 'checked' if not produto or produto.disponivel }}>
+    Disponível no cardápio
+  </label>
+
+  <label class="checkbox-linha">
+    <input type="checkbox" name="destaque" {{ 'checked' if produto and produto.destaque }}>
+    Mostrar como destaque na página inicial
+  </label>
+
+  <div style="display:flex; gap:12px; margin-top:20px;">
+    <button type="submit" class="btn btn-dark">Salvar</button>
+    <a href="{{ url_for('admin_produtos') }}" class="btn-outline-dark">Cancelar</a>
+  </div>
+</form>
+
+{% endblock %}
