@@ -10,4 +10,6 @@ else
     flask --app app init-db
 fi
 
-python app.py
+flask --app app create-admin
+flask --app app seed-db
+flask --app app run --debug
