@@ -9,3 +9,5 @@ if [ -f "instance/vitta.db" ]; then
 else
     flask --app app init-db
 fi
+
+python app.py
