@@ -8,21 +8,7 @@ pedidos, produtos e categorias sem precisar mexer no código.
 
 ## Como rodar
 
-```bash
-pip install -r requirements.txt
-
-# cria o banco de dados (arquivo instance/vitta.db)
-flask --app app init-db
-
-# cria o usuário administrador (usuário: admin / senha: admin123)
-flask --app app create-admin
-
-# carrega o cardápio inicial da VITTA (5 sabores, 2 categorias)
-flask --app app seed-db
-
-# roda o site
-flask --app app run --debug
-```
+Executar start.bash
 
 Abra **http://127.0.0.1:5000** para o site público.
 
