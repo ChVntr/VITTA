@@ -8,7 +8,7 @@ pedidos, produtos e categorias sem precisar mexer no código.
 
 ## Como rodar
 
-Execute **start.bash**
+Execute `start.bash`
 
 Abra **http://127.0.0.1:5000** para o site público.
 
